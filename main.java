@@ -1,26 +1,24 @@
-class main {
+import java.util.Random;
+
+public class main {
 	public static void main(String[] args) {
-		final int SIZE = 50;
-		int[] score = new int[SIZE];
+		Random random = new Random();
 
-		for (int i=0; i<SIZE; i++) {
-				score[i] = (i*83 + 15) % 101;
+		int diceData[] = new int[6];
+
+		for (int i=0; i<8; i++) {
+			int diceResult = random.nextInt(6) + 1;/* 0~5までの整数が取得されるから+1する。 +1をしないと↓の処理で-1の配列を指すことになってエラーになる。 */ 
+			System.out.println(diceResult);
+			diceData[diceResult-1] = diceData[diceResult-1] + 1;/* 配列に合わせるので-1 */
 		}
 
-		int sum = 0;
-		for (int i=0; i<SIZE; i++) {
-				sum += score[i];
-		}
-		double ave = (double)sum / SIZE;
-		System.out.println("平均点 : " + ave);
-
-		int max = score[0];
-		for (int i=1; i<SIZE; i++) {
-				if (max < score[i]) {
-						max = score[i];
+		String diceTotal;
+		for (int i=0; i<6; i++) {
+			diceTotal = (i + 1) + ":";
+				for(int m=0; m<diceData[i]; m++) {
+					diceTotal += "*";
 				}
+			System.out.println(diceTotal);
 		}
-		System.out.println("最高点 : " + max);
-    
 	}
 }
